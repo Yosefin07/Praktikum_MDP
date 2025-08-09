@@ -1,11 +1,16 @@
 package com.example.praktikum_mdp.service.Api
 
+import com.app.kelompok_34.model.request.NoteCreateRequest
 import com.example.praktikum_mdp.model.request.LoginRequest
 import com.example.praktikum_mdp.model.request.RegisterRequest
 import com.example.praktikum_mdp.model.response.LoginResponse
+import com.example.praktikum_mdp.model.response.NoteCreateResponse
+import com.example.praktikum_mdp.model.response.NotesResponse
 import com.example.praktikum_mdp.model.response.RegisterResponse
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.POST
 
 
@@ -34,4 +39,15 @@ interface ApiService {
      */
     @POST("/api/login")
     suspend fun login(@Body request: LoginRequest): Response<LoginResponse>
+
+    @GET ("/api/notes")
+    suspend fun getAllNotes(): Response<NotesResponse>
+
+    @POST("api/notes")
+    suspend fun createNotes(
+        @Header("Authorization") token: String,
+        @Body request: NoteCreateRequest
+    ): Response<NoteCreateResponse>
+
+
 }

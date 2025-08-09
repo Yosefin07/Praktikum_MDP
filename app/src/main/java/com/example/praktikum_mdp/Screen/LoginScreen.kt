@@ -22,8 +22,9 @@ import com.example.praktikum_mdp.R
 import com.example.praktikum_mdp.model.request.LoginRequest
 import com.example.praktikum_mdp.navigation.Screen
 import com.example.praktikum_mdp.service.Api.ApiClient
+import com.google.gson.JsonObject
 import kotlinx.coroutines.launch
-
+import org.json.JSONObject
 @Composable
 fun LoginScreen(navController: NavController) {
     // State untuk menyimpan input username dan password
@@ -144,6 +145,7 @@ fun LoginScreen(navController: NavController) {
                                         isLoading = false
                                         val body = response.body()
 
+
                                         if (response.isSuccessful && body?.code == 200) {
                                             // Login sukses, navigasi ke halaman Home
                                             Toast.makeText(context, "Login berhasil!", Toast.LENGTH_SHORT).show()
@@ -152,13 +154,19 @@ fun LoginScreen(navController: NavController) {
                                             }
                                         } else {
                                             // Login gagal, tampilkan pesan dari server
-                                            val errorMessage = body?.message ?: response.message()
+                                            val errorBody = response.errorBody()?.string()
+                                            val errorMessage = try {
+                                                JSONObject (errorBody ?:"").getString("message")
+                                            }catch (e : Exception){
+                                                response.message()
+                                            }
                                             Toast.makeText(context, "Gagal: $errorMessage", Toast.LENGTH_LONG).show()
                                         }
                                     } catch (e: Exception) {
                                         // Tangani kesalahan (contoh: masalah jaringan)
                                         isLoading = false
-                                        Toast.makeText(context, "Terjadi kesalahan: ${e.localizedMessage}", Toast.LENGTH_LONG).show()
+                                        Toast.makeText(context, "Terjadi kesalahan: ${e.localizedMessage}", Toast
+                                            .LENGTH_LONG).show()
                                     }
                                 }
                             }

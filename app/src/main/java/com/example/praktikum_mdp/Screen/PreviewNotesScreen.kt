@@ -17,7 +17,7 @@ fun PreviewNotesScreen() {
         NoteItem(
             id_notes = "1",
             id_user = "user1",
-            nm_lengkap = "Yosefin",
+            nm_lengkap = "Yosefin Yuniati Zandroto",
             title = "✏️ Belajar Compose",
             content = "Belajar membuat UI dengan Jetpack Compose.",
             created_at = "",
@@ -36,7 +36,7 @@ fun PreviewNotesScreen() {
 
     Surface (
         modifier = Modifier.fillMaxSize(),
-        color = Color(0xFFEEEAFE) // ungu muda
+        color = Color(0xFFCBC9D2)
     ) {
         NotesScreen(notes = dummyNotes)
     }

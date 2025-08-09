@@ -1,6 +1,5 @@
 package com.example.praktikum_mdp.Screen
 
-
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -15,7 +14,7 @@ import com.example.praktikum_mdp.model.response.NoteItem
 fun NotesScreen(notes: List<NoteItem>) {
     Column(
         modifier = Modifier
-            .fillMaxSize() // ⬅️ Ini membuat layar penuh
+            .fillMaxSize()
             .padding(16.dp)
     ) {
         Text(
@@ -24,13 +23,10 @@ fun NotesScreen(notes: List<NoteItem>) {
             modifier = Modifier.padding(bottom = 8.dp)
         )
 
-        LazyColumn (
-            modifier = Modifier.fillMaxSize()
-        ) {
+        LazyColumn(modifier = Modifier.fillMaxSize()) {
             items(notes) { note ->
                 NoteCard(note = note)
             }
         }
     }
 }
-
